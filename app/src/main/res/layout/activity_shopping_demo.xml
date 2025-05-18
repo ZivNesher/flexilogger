@@ -11,17 +11,19 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_open_cart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="View Cart"
-        android:layout_marginTop="12dp"/>
-    <Button
+        android:text="🛒 View Cart"
+        android:backgroundTint="@color/teal_700"
+        android:layout_marginTop="8dp" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_back"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Back" />
-
+        android:text="← Back"
+        android:layout_marginTop="8dp" />
 </LinearLayout>

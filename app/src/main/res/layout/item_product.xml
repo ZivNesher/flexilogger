@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    card_view:cardCornerRadius="12dp"
-    card_view:cardElevation="6dp">
+    card_view:cardCornerRadius="16dp"
+    card_view:cardElevation="8dp">
 
     <LinearLayout
-        android:padding="12dp"
+        android:padding="16dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,7 +17,8 @@
             android:id="@+id/product_image"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:background="@android:color/darker_gray" />
 
         <TextView
             android:id="@+id/product_name"
@@ -33,25 +34,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="View Product"
-            android:layout_marginTop="8dp"/>
-        <Button
+            android:text="👁 View Product"
+            android:backgroundTint="@color/teal_700"
+            android:layout_marginTop="8dp" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_buy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Buy Now"
-            android:layout_marginTop="8dp"/>
-        <Button
+            android:text="🛒 Buy Now"
+            android:backgroundTint="@color/black"
+            android:layout_marginTop="8dp" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_remove"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Remove from Cart"
+            android:text="❌ Remove from Cart"
             android:layout_marginTop="8dp"
-            android:visibility="gone" />
-
+            android:backgroundTint="@color/red_400"
+            android:visibility="gone"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
