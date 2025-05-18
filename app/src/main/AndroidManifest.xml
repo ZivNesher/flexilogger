@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ShoppingDemoActivity" />
+        <activity android:name=".CartActivity"></activity>
         <activity android:name=".LogViewerActivity" />
         <provider
             android:name="androidx.core.content.FileProvider"

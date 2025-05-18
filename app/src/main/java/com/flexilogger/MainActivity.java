@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ziv.flexilogger.Flexilogger;
 
@@ -23,42 +25,33 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        logDebugBtn = findViewById(R.id.btn_debug);
-        logInfoBtn = findViewById(R.id.btn_info);
-        logErrorBtn = findViewById(R.id.btn_error);
         Button viewLogsBtn = findViewById(R.id.btn_view_logs);
         Button shopDemoBtn = findViewById(R.id.btn_shop_demo);
 
-        logDebugBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Flexilogger.log(MainActivity.this, "MainActivity", "Debug log clicked", Flexilogger.LogLevel.DEBUG);
-            }
-        });
+
         shopDemoBtn.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, ShoppingDemoActivity.class));
         });
-
-        logInfoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Flexilogger.log(MainActivity.this, "MainActivity", "Info log clicked", Flexilogger.LogLevel.INFO);
-            }
-        });
-
-        logErrorBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Flexilogger.log(MainActivity.this, "MainActivity", "Error log clicked", Flexilogger.LogLevel.ERROR);
-            }
-        });
-
         viewLogsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, LogViewerActivity.class));
             }
         });
+        Button errorBtn = findViewById(R.id.btn_trigger_error);
+        errorBtn.setOnClickListener(v -> {
+            try {
+                // simulate crash
+                String nullStr = null;
+                nullStr.length(); // throws NullPointerException
+            } catch (Exception e) {
+                Flexilogger.log(MainActivity.this, "Crash", "ERROR: " + e.getMessage(), Flexilogger.LogLevel.ERROR);
+                Toast.makeText(this, "Simulated error captured in log", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
+
+
 }

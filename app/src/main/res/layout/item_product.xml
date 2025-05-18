@@ -37,7 +37,21 @@
             android:id="@+id/btn_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="View Product"
+            android:layout_marginTop="8dp"/>
+        <Button
+            android:id="@+id/btn_buy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Buy Now"
             android:layout_marginTop="8dp"/>
+        <Button
+            android:id="@+id/btn_remove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Remove from Cart"
+            android:layout_marginTop="8dp"
+            android:visibility="gone" />
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

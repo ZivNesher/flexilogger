@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -26,6 +27,8 @@ public class ShoppingDemoActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.product_recycler);
         backBtn = findViewById(R.id.btn_back);
+        Button openCartBtn = findViewById(R.id.btn_open_cart);
+
 
         // Sample products with images and prices
         products = new ArrayList<>();
@@ -36,13 +39,17 @@ public class ShoppingDemoActivity extends AppCompatActivity {
         products.add(new Product("105", "Running Shoes", "$129.99", "https://via.placeholder.com/300x200.png?text=Shoes"));
         products.add(new Product("106", "Leather Wallet", "$49.99", "https://via.placeholder.com/300x200.png?text=Wallet"));
 
-        adapter = new ProductAdapter(this, products);
+        adapter = new ProductAdapter(this, products, ProductAdapter.Mode.SHOP);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // 2 columns
         recyclerView.setAdapter(adapter);
+        openCartBtn.setOnClickListener(v -> {
+            startActivity(new Intent(ShoppingDemoActivity.this, CartActivity.class));
+        });
 
         backBtn.setOnClickListener(v -> {
             Flexilogger.log(this, "Shopping", "User clicked BACK", Flexilogger.LogLevel.INFO);
             finish();
         });
+
     }
 }
