@@ -1,46 +1,72 @@
 # FlexiLogger
 
-FlexiLogger is a lightweight and efficient logging library for Android. It allows developers to log messages to a local file and view them through a structured and user-friendly in-app interface. The library is intended to enhance traceability and debugging even in production environments.
+**FlexiLogger** is a lightweight and efficient logging library for Android. It allows developers to log structured messages with levels, tags, and timestamps, and send them to **Firebase Realtime Database**. Logs are then visualized through a real-time, web-based dashboard.
+
+🔗 **View logs in the web dashboard:** [https://github.com/ZivNesher/flexiloggerWEB](https://github.com/ZivNesher/flexiloggerWEB)
 
 ---
 
-## Features
+## ✅ Features
 
-- Support for log levels: `DEBUG`, `INFO`, `ERROR`
-- Persistent logging to internal file (`flexi_logs.txt`)
-- Optional user and session ID tagging
-- In-app log viewer with:
-    - Log type filtering
-    - Keyword search
-    - Line numbering
-    - Color-coded severity levels
-    - Export to JSON and ZIP
-    - Share log file via `Intent`
-    - Auto-refresh every 5 seconds
-    - Long-press to copy log contents
+- Log levels: `DEBUG`, `INFO`, `ERROR`
+- Automatic timestamping
+- User ID and Session ID tagging
+- Sends logs to Firebase Realtime Database
+- [Optional] Local fallback to file (`flexi_logs.txt`)
+- Web dashboard provides:
+  - Pie charts by `tag`, `user`, and `level`
+  - Realtime log table with filters and color coding
+  - App-level password protection
 
 ---
 
-## Integration
+## 🚀 Integration
 
-1. Add the `flexilogger` module to your Android project, or copy `Flexilogger.java` directly.
+1. Add the `flexilogger` module to your Android project or import via GitHub:
 
-2. In your app-level `build.gradle`:
+<details>
+<summary>Gradle (local module)</summary>
 
 ```groovy
 implementation project(":flexilogger")
 ```
 
-3. (Optional) Initialize user/session identifiers:
+</details>
+
+<details>
+<summary>JitPack (optional)</summary>
+
+Add to your root `build.gradle`:
+
+```groovy
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+Then in app-level `build.gradle`:
+
+```groovy
+implementation 'com.github.ZivNesher:Flexilogger:1.0.0'
+```
+
+</details>
+
+2. Initialize FlexiLogger in your Application or main Activity:
 
 ```java
 Flexilogger.setUserId("user_1234");
 Flexilogger.setSessionId("session_5678");
+
+FlexiLoggerConfig config = new FlexiLoggerConfig.Builder("myAppName").build();
+Flexilogger.init(getApplicationContext(), config);
 ```
 
 ---
 
-## Usage
+## ✍️ Usage
 
 ### Logging
 
@@ -50,57 +76,78 @@ Flexilogger.log(context, "Cart", "Empty cart", Flexilogger.LogLevel.DEBUG);
 Flexilogger.log(context, "API", "Server error", Flexilogger.LogLevel.ERROR);
 ```
 
-### Viewing Logs
+---
 
-```java
-startActivity(new Intent(context, LogViewerActivity.class));
+## 🔍 Viewing Logs (Web Dashboard)
+
+Logs are sent to:
+
+```
+apps/
+  └── myAppName/
+      └── logs/
+          └── user_1234/
+              └── session_5678/
+                  └── log_xyz123: {
+                        tag: "LoginScreen",
+                        msg: "User pressed login",
+                        level: "INFO",
+                        ts: 1723459123
+                  }
 ```
 
----
+The **dashboard** at  
+👉 [https://github.com/ZivNesher/flexiloggerWEB](https://github.com/ZivNesher/flexiloggerWEB)  
+displays these logs using:
 
-## LogViewerActivity
-
-The built-in log viewer screen supports:
-
-- Free text search
-- Log level filter (ALL, INFO, DEBUG, ERROR)
-- Scrollable, copyable log output
-- Line numbers
-- Color-coded: red for ERROR, blue for INFO, black for DEBUG
-- Export options:
-    - JSON array of lines
-    - ZIP file containing `flexi_logs.txt`
-- Share log file via `Intent`
-- Auto-refresh every 5 seconds
-- Long-press to copy all logs to clipboard
+- 🥧 Pie charts by `tag`, `user ID`, and `level`
+- 📋 Interactive table with search and filters
+- 🔐 App-level password auth (set in Firebase under `/meta/passwordHash`)
 
 ---
 
-## Customization
+## 📁 Optional: Local File Logging
 
-- Change file name by editing the `LOG_FILE_NAME` constant in `Flexilogger.java`
-- Extend with additional log levels or structured log formats (e.g., JSON)
-- Integrate with external systems (Firebase, Sentry, etc.) for cloud-based tracking
+In addition to Firebase, logs are also saved locally (optional fallback):
 
----
-
-## Troubleshooting
-
-- **Logs not written?**
-    - Ensure `Flexilogger.log()` is called from a valid Context.
-    - Check that the internal file directory is writable.
-
-- **LogViewer shows no logs?**
-    - Confirm that the log file exists.
-    - Try exporting via "Share" to inspect content.
-
-- **Sharing/export fails?**
-    - Verify `FileProvider` is configured in `AndroidManifest.xml`
+- File: `flexi_logs.txt`
+- Location: App's internal storage directory
+- Useful for offline inspection
+- You may implement a share/export activity if needed
 
 ---
 
-## License
+## 🧪 Troubleshooting
 
-MIT License
+- **Dashboard shows no logs**  
+  - Ensure `Flexilogger.init()` is called
+  - Confirm app name matches Firebase DB path
+  - Verify Firebase Realtime Database rules allow writes
 
-Free to use, extend, and integrate into commercial or open-source projects.
+- **Log not saved locally?**  
+  - Check context passed to `log()` is valid
+  - Ensure internal storage is accessible
+
+---
+
+## 🧩 Built With
+
+- Android (Java)
+- Firebase Realtime Database
+- Optional: MUI + React dashboard
+
+---
+
+## 📜 License
+
+MIT License  
+Free to use, extend, and integrate into open-source or commercial apps.
+
+---
+
+## 🙌 Author
+
+**Ziv Nesher**  
+[github.com/ZivNesher](https://github.com/ZivNesher)
+
+---
