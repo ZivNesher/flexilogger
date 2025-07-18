@@ -25,6 +25,7 @@
             android:backgroundTint="@color/teal_700"
             android:text="🛍️ Shopping Demo" />
 
+        <!--
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_view_logs"
             android:layout_width="match_parent"
@@ -32,6 +33,7 @@
             android:backgroundTint="@color/red_400"
             android:text="📄 View Logs"
             android:layout_marginTop="12dp" />
+      -->
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_trigger_error"

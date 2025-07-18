@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ziv.flexilogger.Flexilogger;
+import com.ziv.flexilogger.FlexiLoggerConfig;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -22,22 +23,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Flexilogger.setUserId("user_1234");
         Flexilogger.setSessionId("session_xyz");
+        FlexiLoggerConfig cfg = new FlexiLoggerConfig.Builder("demoApp").build();
+        Flexilogger.init(this, cfg);
 
 
 
-        Button viewLogsBtn = findViewById(R.id.btn_view_logs);
+        //Button viewLogsBtn = findViewById(R.id.btn_view_logs);
         Button shopDemoBtn = findViewById(R.id.btn_shop_demo);
 
 
         shopDemoBtn.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, ShoppingDemoActivity.class));
         });
-        viewLogsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, LogViewerActivity.class));
-            }
-        });
+//        viewLogsBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(MainActivity.this, LogViewerActivity.class));
+//            }
+//        });
         Button errorBtn = findViewById(R.id.btn_trigger_error);
         errorBtn.setOnClickListener(v -> {
             try {

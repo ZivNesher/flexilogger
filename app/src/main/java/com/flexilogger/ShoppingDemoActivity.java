@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.ziv.flexilogger.Flexilogger;
+import com.ziv.flexilogger.FlexiLoggerConfig;
 
 import java.util.ArrayList;
 import java.util.List;
